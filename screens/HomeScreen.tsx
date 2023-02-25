@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { HeroImage } from "../assets";
+import { HeroImage, Logo } from "../assets";
 
 const HomeScreen = () => {
   // returns the navigation prop of the screen it's inside.
@@ -23,14 +23,15 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <SafeAreaView className="flex flex-col h-full w-full bg-slate-50 relative">
+    <SafeAreaView className="flex h-full w-full bg-slate-50">
       <View className="h-[33vh]">
         {/* Top Section */}
-        <View className="flex flex-row items-center gap-3 w-full px-6 py-2">
-          <View className="flex rounded-full items-center justify-center bg-slate-700 w-12 h-12">
+        <View className="flex flex-row w-full px-6 py-2">
+            <Image source={Logo} resizeMode="contain" className="w-1/2 h-14" />
+          {/* <View className="flex rounded-full items-center justify-center bg-slate-700 w-12 h-12">
             <Text className="text-white font-bold text-xl">N</Text>
           </View>
-          <Text className="font-bold text-3xl">nexplore</Text>
+          <Text className="font-bold text-3xl">nexplore</Text> */}
         </View>
 
         {/* Hero Section */}
@@ -38,7 +39,7 @@ const HomeScreen = () => {
           <Text className="text-slate-600 text-[42px]">
             Get out there and discover your
           </Text>
-          <Text className="text-blue-500 font-bold text-[38px]">
+          <Text className="text-black font-bold text-[38px]">
             Next Adventure!
           </Text>
         </View>
@@ -54,10 +55,10 @@ const HomeScreen = () => {
         </View>
 
         {/* Go Button */}
-        <View className="flex items-center justify-center absolute w-32 h-32 border-blue-500 border-4 rounded-full bg-transparent">
+        <View className="flex items-center justify-center absolute w-32 h-32 border-black border-4 rounded-full bg-transparent">
           <TouchableOpacity>
-            <View className="flex items-center justify-center bg-blue-500 w-28 h-28 rounded-full">
-              <Text className="text-white text-5xl font-bold">Go</Text> 
+            <View className="flex items-center justify-center bg-black w-28 h-28 rounded-full">
+              <Text className="text-white text-3xl font-bold">Start</Text> 
             </View>
           </TouchableOpacity>
         </View>
