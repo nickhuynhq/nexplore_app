@@ -1,4 +1,10 @@
-import { View, Text, SafeAreaView, Image } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { HeroImage } from "../assets";
@@ -18,7 +24,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className="flex flex-col h-full w-full bg-slate-50 relative">
-      <View className="h-[40vh]">
+      <View className="h-[33vh]">
         {/* Top Section */}
         <View className="flex flex-row items-center gap-3 w-full px-6 py-2">
           <View className="flex rounded-full items-center justify-center bg-slate-700 w-12 h-12">
@@ -38,13 +44,23 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      <View className="h-full w-full relative">
+      <View className="flex items-center justify-center h-full w-full relative">
         {/* Background circles */}
-        <View className="w-[320px] h-[320px] bg-blue-500 rounded-full absolute -right-16"></View>
-        <View className="w-[320px] h-[320px] bg-orange-400 rounded-full absolute  bottom-60 -left-12"></View>
-        {/* Image Container */}
+        <View className="h-full w-full">
+          <View className="w-[320px] h-[320px] bg-blue-500 rounded-full absolute -right-16"></View>
+          <View className="w-[320px] h-[320px] bg-orange-400 rounded-full absolute  bottom-60 -left-12"></View>
 
-        <Image source={HeroImage} className="w-full h-[70%] object-cover" />
+          <Image source={HeroImage} className="w-full h-[80%]" />
+        </View>
+
+        {/* Go Button */}
+        <View className="flex items-center justify-center absolute w-32 h-32 border-blue-500 border-4 rounded-full bg-transparent">
+          <TouchableOpacity>
+            <View className="flex items-center justify-center bg-blue-500 w-28 h-28 rounded-full">
+              <Text className="text-white text-5xl font-bold">Go</Text> 
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
