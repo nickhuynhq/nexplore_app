@@ -1,12 +1,18 @@
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "./screens/HomeScreen";
+
+// returns Screen and Navigator which are used for configuring the navigator
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-      <SafeAreaView className="flex h-full bg-blue-600 justify-center items-center">
-        <Text className="text-xl">Hello World!</Text>
-        <StatusBar style="auto" />
-      </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
