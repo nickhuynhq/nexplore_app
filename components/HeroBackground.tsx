@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { ImageBackground } from "react-native";
 
 import * as Animatable from "react-native-animatable";
-import { Banff, Beach, Egypt, Greece, Tokyo } from "../assets/images";
+import { Banff, Beach, Egypt, Greece, Tokyo } from "../assets/backgroundImages";
 
 const images = [Greece, Tokyo, Banff, Egypt, Beach];
 

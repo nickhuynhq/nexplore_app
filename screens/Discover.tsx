@@ -1,16 +1,19 @@
-import { View, Text, Image, SafeAreaView } from "react-native";
-import React, { useLayoutEffect } from "react";
+import { View, Text, Image, SafeAreaView, ScrollView } from "react-native";
+import React, { useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
-import { Avatar } from "../assets";
+import { Attractions, Avatar, Hotels, Restaurants } from "../assets";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
+import MenuItem from "../components/MenuItem";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
 const Discover = () => {
   const navigation = useNavigation<discoverProps>();
+
+  const [menuSelection, setMenuSelection] = useState("resturants")
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -48,6 +51,35 @@ const Discover = () => {
           }}
         />
       </View>
+
+      {/* Menu Container */}
+      <ScrollView>
+       
+      </ScrollView>
+
+      <View className="flex flex-row items-center justify-between px-8 mt-4">
+          <MenuItem 
+            key={"hotel"} 
+            title="Hotels" 
+            imageSrc={Hotels} 
+            type={menuSelection}
+            setType={setMenuSelection}
+          />
+          <MenuItem
+            key={"resturants"}
+            title="Resturants"
+            imageSrc={Restaurants}
+            type={menuSelection}
+            setType={setMenuSelection}
+          />
+          <MenuItem
+            key={"attraction"}
+            title="Attractions"
+            imageSrc={Attractions}
+            type={menuSelection}
+            setType={setMenuSelection}
+          />
+        </View>
     </SafeAreaView>
   );
 };
