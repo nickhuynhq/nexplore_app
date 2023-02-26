@@ -37,7 +37,7 @@ const HomeScreen = () => {
 
       <View className="absolute w-full h-full py-16 z-10">
         {/* Top Section */}
-        <View className="flex flex-row w-full px-6 pt-6">
+        <View className="flex flex-row w-full px-6">
           <Animatable.Image
             animation="bounceInLeft"
             easing="ease-in-out"
@@ -48,7 +48,7 @@ const HomeScreen = () => {
         </View>
 
         {/* Hero Section */}
-        <View className="px-6 mt-20 space-y-3">
+        <View className="px-6 mt-12 space-y-3">
           <Animatable.Text
             animation="fadeInLeft"
             delay={1000}
@@ -65,9 +65,13 @@ const HomeScreen = () => {
           </Animatable.Text>
         </View>
 
-        <View className="flex items-center justify-center h-full w-full relative">
+        <View className="flex items-center justify-center h-full w-full">
           {/* Go Button */}
-          <Animatable.View animation="fadeInUp" delay={1500} className="flex items-center justify-center absolute w-32 h-32 border-black border-4 rounded-full bg-transparent">
+          <Animatable.View
+            animation="fadeInUp"
+            delay={1500}
+            className="flex items-center justify-center absolute w-32 h-32 border-black border-4 rounded-full bg-transparent"
+          >
             <TouchableOpacity onPress={() => navigation.navigate("Discover")}>
               <Animatable.View
                 animation={"pulse"}

@@ -1,4 +1,11 @@
-import { View, Text, Image, SafeAreaView, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
@@ -7,6 +14,7 @@ import { Attractions, Avatar, Hotels, Restaurants } from "../assets";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
 import MenuItem from "../components/MenuItem";
+import { FontAwesome } from "@expo/vector-icons";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
@@ -36,6 +44,7 @@ const Discover = () => {
         </View>
       </View>
 
+      {/* Search Bar */}
       <View className="flex-row items-center bg-white mx-6 mt-6 rounded-xl px-4 shadow-md">
         <GooglePlacesAutocomplete
           GooglePlacesDetailsQuery={{ fields: "geometry" }}
@@ -52,10 +61,19 @@ const Discover = () => {
         />
       </View>
 
-      {/* Menu Container */}
-      <ScrollView></ScrollView>
+      {/* Listings Container */}
+      <ScrollView className="px-6 py-4">
+        <View className="flex-row justify-between w-full">
+          <Text className="font-bold text-2xl">Top Results</Text>
+          <TouchableOpacity className="flex-row items-center gap-2 ">
+            <Text className="text-gray-400 font-semibold text-lg">Explore</Text>
+            <FontAwesome name="long-arrow-right" size={24} color="gray" />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
 
-      <View className="absolute bottom-0 bg-white shadow-md h-[164px] w-full flex flex-row items-center justify-between px-8">
+      {/* Menu Container */}
+      <View className="absolute bottom-0 bg-white shadow-md h-[164px] w-full flex flex-row items-center justify-between px-10">
         <MenuItem
           key={"hotel"}
           title="Hotels"
