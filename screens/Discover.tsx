@@ -11,7 +11,7 @@ import React, { useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
-import { Attractions, Avatar, Hotels, Restaurants } from "../assets";
+import { Attractions, Avatar, Hotels, NotFound, Restaurants } from "../assets";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
 import MenuItem from "../components/MenuItem";
@@ -24,7 +24,8 @@ const Discover = () => {
   const navigation = useNavigation<discoverProps>();
 
   const [menuSelection, setMenuSelection] = useState("resturants");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [mainData, setMainData] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -76,27 +77,42 @@ const Discover = () => {
       {/* Listings Container */}
       {isLoading ? (
         <View className="flex-1 items-center justify-center pb-20">
-          <ActivityIndicator size="large" color="black"/>
+          <ActivityIndicator size="large" color="black" />
         </View>
       ) : (
         <ScrollView className="px-8">
           <View className="flex-row justify-between flex-wrap items-center mt-3">
-            <ItemCard
-              key={1}
-              imageSrc={
-                "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
-              }
-              title="Vietnam Farm fsdgsdfgdfsgdfsgd"
-              location="Vietnam"
-            />
-            <ItemCard
-              key={2}
-              imageSrc={
-                "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
-              }
-              title="Vietnam Farm"
-              location="Vietnam"
-            />
+            {mainData?.length > 0 ? (
+              <>
+                <ItemCard
+                  key={1}
+                  imageSrc={
+                    "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
+                  }
+                  title="Vietnam Farm fsdgsdfgdfsgdfsgd"
+                  location="Vietnam"
+                />
+                <ItemCard
+                  key={2}
+                  imageSrc={
+                    "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
+                  }
+                  title="Vietnam Farm"
+                  location="Vietnam"
+                />
+              </>
+            ) : (
+              <>
+                <View className="flex w-full h-[300px] items-center gap-3 justify-center">
+                  <Image
+                    resizeMode="contain"
+                    className="w-32 h-32"
+                    source={NotFound}
+                  />
+                  <Text className="font-bold text-xl">Sorry... No Data Found</Text>
+                </View>
+              </>
+            )}
           </View>
         </ScrollView>
       )}
