@@ -1,14 +1,25 @@
-import { Text, View } from 'react-native'
-import React, { Component } from 'react'
+import { View, Text } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../App";
+import { useNavigation } from "@react-navigation/native";
 
-export class Discover extends Component {
-  render() {
-    return (
-      <View>
-        <Text>Discover</Text>
-      </View>
-    )
-  }
-}
+type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
-export default Discover
+const Discover = () => {
+  const navigation = useNavigation<discoverProps>();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+    });
+  }, []);
+
+  return (
+    <View>
+      <Text>Discover</Text>
+    </View>
+  );
+};
+
+export default Discover;

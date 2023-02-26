@@ -9,10 +9,10 @@ import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { HeroImage, Logo } from "../assets";
 import * as Animatable from "react-native-animatable";
-import {StackNavigationProp} from '@react-navigation/stack';
+import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 
-type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
+type homeScreenProp = StackNavigationProp<RootStackParamList, "Home">;
 
 const HomeScreen = () => {
   // returns the navigation prop of the screen it's inside.
@@ -84,9 +84,7 @@ const HomeScreen = () => {
 
         {/* Go Button */}
         <View className="flex items-center justify-center absolute w-32 h-32 border-sky-500 border-4 rounded-full bg-transparent">
-          <TouchableOpacity
-          onPress={() => navigation.navigate("Discover")}
-          >
+          <TouchableOpacity onPress={() => navigation.navigate("Discover")}>
             <Animatable.View
               animation={"pulse"}
               easing="ease-in-out"
