@@ -17,7 +17,10 @@ const Discover = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-slate-50 relative">
+      <View className="flex-row items-center justify-between px-8">
       <Text>Discover</Text>
+      </View>
+
     </SafeAreaView>
   );
 };

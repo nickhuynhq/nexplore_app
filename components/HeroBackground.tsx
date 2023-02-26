@@ -13,17 +13,15 @@ const HeroBackground = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (imageRef.current) {
-        if (imageRef.current.fadeOut) 
-        // Fade out the current image
-        imageRef.current.fadeOut(1000).then(() => {
+        if (imageRef.current.fadeOut)
+          // Fade out the current image
+          imageRef.current.fadeOut(1000).then(() => {
+            // Set the next image index after the fade out is complete
+            setIndex((prevIndex) => (prevIndex + 1) % images.length);
 
-          // Set the next image index after the fade out is complete
-          setIndex((prevIndex) => (prevIndex + 1) % images.length);
-
-          // Fade in the next image
-          if (imageRef?.current?.fadeIn) 
-          imageRef.current?.fadeIn(1000);
-        });
+            // Fade in the next image
+            if (imageRef?.current?.fadeIn) imageRef.current?.fadeIn(1000);
+          });
       }
     }, 6000);
 
@@ -31,14 +29,12 @@ const HeroBackground = () => {
   }, []);
 
   return (
-    <Animatable.View>
-      <Animatable.View ref={imageRef}  animation="fadeIn">
-        <ImageBackground
-          source={images[index]}
-          resizeMode="cover"
-          className="h-full w-full"
-        />
-      </Animatable.View>
+    <Animatable.View ref={imageRef} animation="fadeIn">
+      <ImageBackground
+        source={images[index]}
+        resizeMode="cover"
+        className="h-full w-full"
+      />
     </Animatable.View>
   );
 };
