@@ -14,7 +14,8 @@ import { Attractions, Avatar, Hotels, Restaurants } from "../assets";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
 import MenuItem from "../components/MenuItem";
-import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import ItemCard from "../components/ItemCard";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
@@ -62,18 +63,38 @@ const Discover = () => {
       </View>
 
       {/* Listings Container */}
-      <ScrollView className="px-6 py-4">
+      <ScrollView className="px-8 py-4">
         <View className="flex-row justify-between w-full">
           <Text className="font-bold text-2xl">Top Results</Text>
-          <TouchableOpacity className="flex-row items-center gap-2 ">
-            <Text className="text-gray-400 font-semibold text-lg">Explore</Text>
-            <FontAwesome name="long-arrow-right" size={24} color="gray" />
+          <TouchableOpacity className="flex-row items-center ">
+            <Text className="text-gray-400 font-semibold text-md">Explore</Text>
+            <MaterialIcons name="keyboard-arrow-right" size={24} color="gray" />
           </TouchableOpacity>
+        </View>
+
+        {/* Card Container */}
+        <View className="flex-row justify-between flex-wrap items-center mt-3">
+          <ItemCard
+            key={1}
+            imageSrc={
+              "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
+            }
+            title="Vietnam Farm fsdgsdfgdfsgdfsgd"
+            location="Vietnam"
+          />
+           <ItemCard
+            key={2}
+            imageSrc={
+              "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
+            }
+            title="Vietnam Farm"
+            location="Vietnam"
+          />
         </View>
       </ScrollView>
 
       {/* Menu Container */}
-      <View className="absolute bottom-0 bg-white shadow-md h-[164px] w-full flex flex-row items-center justify-between px-10">
+      <View className="absolute bottom-0 bg-white shadow-md h-[124px] w-full flex flex-row items-center justify-between px-10 pb-2">
         <MenuItem
           key={"hotel"}
           title="Hotels"

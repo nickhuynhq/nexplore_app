@@ -23,7 +23,7 @@ const MenuItem = ({ title, imageSrc, type, setType }: MenuItemProps) => {
       onPress={handleMenuPress}
     >
       <View
-        className={`w-20 h-20 p-4 rounded-lg ${
+        className={`w-16 h-16 p-4 rounded-lg ${
           type === title.toLocaleLowerCase()
             ? "bg-gray-300 shadow-lg"
             : "bg-white shadow-lg"
