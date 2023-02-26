@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -23,6 +24,7 @@ const Discover = () => {
   const navigation = useNavigation<discoverProps>();
 
   const [menuSelection, setMenuSelection] = useState("resturants");
+  const [isLoading, setIsLoading] = useState(true);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -62,36 +64,42 @@ const Discover = () => {
         />
       </View>
 
-      {/* Listings Container */}
-      <ScrollView className="px-8 py-4">
-        <View className="flex-row justify-between w-full">
-          <Text className="font-bold text-2xl">Top Results</Text>
-          <TouchableOpacity className="flex-row items-center ">
-            <Text className="text-gray-400 font-semibold text-md">Explore</Text>
-            <MaterialIcons name="keyboard-arrow-right" size={24} color="gray" />
-          </TouchableOpacity>
-        </View>
+      {/* Listings Title */}
+      <View className="flex-row justify-between w-full px-8 py-4">
+        <Text className="font-bold text-2xl">Top Results</Text>
+        <TouchableOpacity className="flex-row items-center ">
+          <Text className="text-gray-400 font-semibold text-md">Explore</Text>
+          <MaterialIcons name="keyboard-arrow-right" size={24} color="gray" />
+        </TouchableOpacity>
+      </View>
 
-        {/* Card Container */}
-        <View className="flex-row justify-between flex-wrap items-center mt-3">
-          <ItemCard
-            key={1}
-            imageSrc={
-              "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
-            }
-            title="Vietnam Farm fsdgsdfgdfsgdfsgd"
-            location="Vietnam"
-          />
-           <ItemCard
-            key={2}
-            imageSrc={
-              "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
-            }
-            title="Vietnam Farm"
-            location="Vietnam"
-          />
+      {/* Listings Container */}
+      {isLoading ? (
+        <View className="flex-1 items-center justify-center pb-20">
+          <ActivityIndicator size="large" color="black"/>
         </View>
-      </ScrollView>
+      ) : (
+        <ScrollView className="px-8">
+          <View className="flex-row justify-between flex-wrap items-center mt-3">
+            <ItemCard
+              key={1}
+              imageSrc={
+                "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
+              }
+              title="Vietnam Farm fsdgsdfgdfsgdfsgd"
+              location="Vietnam"
+            />
+            <ItemCard
+              key={2}
+              imageSrc={
+                "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
+              }
+              title="Vietnam Farm"
+              location="Vietnam"
+            />
+          </View>
+        </ScrollView>
+      )}
 
       {/* Menu Container */}
       <View className="absolute bottom-0 bg-white shadow-md h-[124px] w-full flex flex-row items-center justify-between px-10 pb-2">
