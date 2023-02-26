@@ -8,6 +8,7 @@ import {
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { HeroImage, Logo } from "../assets";
+import * as Animatable from "react-native-animatable";
 
 const HomeScreen = () => {
   // returns the navigation prop of the screen it's inside.
@@ -26,40 +27,68 @@ const HomeScreen = () => {
     <SafeAreaView className="flex h-full w-full bg-slate-50">
       <View className="h-[33vh]">
         {/* Top Section */}
-        <View className="flex flex-row w-full px-6 py-2">
-            <Image source={Logo} resizeMode="contain" className="w-1/2 h-14" />
-          {/* <View className="flex rounded-full items-center justify-center bg-slate-700 w-12 h-12">
-            <Text className="text-white font-bold text-xl">N</Text>
-          </View>
-          <Text className="font-bold text-3xl">nexplore</Text> */}
+        <View className="flex flex-row w-full px-6 pt-6">
+          <Animatable.Image
+            animation="bounceInLeft"
+            easing="ease-in-out"
+            source={Logo}
+            resizeMode="contain"
+            className="w-2/3 h-14"
+          />
         </View>
 
         {/* Hero Section */}
         <View className="px-6 mt-8 space-y-3">
-          <Text className="text-slate-600 text-[42px]">
+          <Animatable.Text
+            animation="fadeInLeft"
+            delay={1000}
+            className="text-slate-600 text-[42px]"
+          >
             Get out there and discover your
-          </Text>
-          <Text className="text-black font-bold text-[38px]">
+          </Animatable.Text>
+          <Animatable.Text
+            animation="fadeInLeft"
+            delay={1500}
+            className="text-black font-bold text-[38px]"
+          >
             Next Adventure!
-          </Text>
+          </Animatable.Text>
         </View>
       </View>
 
       <View className="flex items-center justify-center h-full w-full relative">
         {/* Background circles */}
         <View className="h-full w-full">
-          <View className="w-[320px] h-[320px] bg-blue-500 rounded-full absolute -right-16"></View>
-          <View className="w-[320px] h-[320px] bg-orange-400 rounded-full absolute  bottom-60 -left-12"></View>
+          <Animatable.View
+            animation="fadeInUp"
+            delay={400}
+            className="w-[320px] h-[320px] bg-sky-500 rounded-full absolute -right-32"
+          ></Animatable.View>
+          <Animatable.View
+            animation="fadeInUp"
+            delay={400}
+            className="w-[320px] h-[320px] bg-orange-400 rounded-full absolute  bottom-60 -left-12"
+          ></Animatable.View>
 
-          <Image source={HeroImage} className="w-full h-[80%]" />
+          <Animatable.Image
+            animation="fadeInUp"
+            easing="ease-in-out"
+            source={HeroImage}
+            className="w-full h-[80%]"
+          />
         </View>
 
         {/* Go Button */}
-        <View className="flex items-center justify-center absolute w-32 h-32 border-black border-4 rounded-full bg-transparent">
+        <View className="flex items-center justify-center absolute w-32 h-32 border-sky-500 border-4 rounded-full bg-transparent">
           <TouchableOpacity>
-            <View className="flex items-center justify-center bg-black w-28 h-28 rounded-full">
-              <Text className="text-white text-3xl font-bold">Start</Text> 
-            </View>
+            <Animatable.View
+              animation={"pulse"}
+              easing="ease-in-out"
+              iterationCount={"infinite"}
+              className="flex items-center justify-center bg-sky-500 w-28 h-28 rounded-full"
+            >
+              <Text className="text-white text-3xl font-bold">Start</Text>
+            </Animatable.View>
           </TouchableOpacity>
         </View>
       </View>
