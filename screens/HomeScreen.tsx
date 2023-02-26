@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { HeroImage, Logo } from "../assets";
 import * as Animatable from "react-native-animatable";
 
+
 const HomeScreen = () => {
   // returns the navigation prop of the screen it's inside.
   // go to another screen, figures out the action it needs to take to do it
@@ -80,7 +81,9 @@ const HomeScreen = () => {
 
         {/* Go Button */}
         <View className="flex items-center justify-center absolute w-32 h-32 border-sky-500 border-4 rounded-full bg-transparent">
-          <TouchableOpacity>
+          <TouchableOpacity
+          onPress={() => navigation.navigate("Discover")}
+          >
             <Animatable.View
               animation={"pulse"}
               easing="ease-in-out"
