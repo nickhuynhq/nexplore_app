@@ -67,7 +67,7 @@ const HomeScreen = () => {
 
         <View className="flex items-center justify-center h-full w-full relative">
           {/* Go Button */}
-          <View className="flex items-center justify-center absolute w-32 h-32 border-black border-4 rounded-full bg-transparent">
+          <Animatable.View animation="fadeInUp" delay={1500} className="flex items-center justify-center absolute w-32 h-32 border-black border-4 rounded-full bg-transparent">
             <TouchableOpacity onPress={() => navigation.navigate("Discover")}>
               <Animatable.View
                 animation={"pulse"}
@@ -78,7 +78,7 @@ const HomeScreen = () => {
                 <Text className="text-white text-3xl font-bold">Start</Text>
               </Animatable.View>
             </TouchableOpacity>
-          </View>
+          </Animatable.View>
         </View>
       </View>
     </SafeAreaView>
