@@ -33,12 +33,14 @@ const Discover = () => {
         </View>
       </View>
 
-      <View className="flex-row items-center bg-white mx-6 mt-4 rounded-xl px-4 shadow-md">
+      <View className="flex-row items-center bg-white mx-6 mt-6 rounded-xl px-4 shadow-md">
         <GooglePlacesAutocomplete
-          placeholder="Search"
+          GooglePlacesDetailsQuery={{ fields: "geometry" }}
+          placeholder="Search Location"
+          fetchDetails={true}
           onPress={(data, details = null) => {
             // 'details' is provided when fetchDetails = true
-            console.log(data, details);
+            console.log(details?.geometry?.viewport);
           }}
           query={{
             key: GOOGLE_API_KEY,
