@@ -9,12 +9,15 @@ import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { HeroImage, Logo } from "../assets";
 import * as Animatable from "react-native-animatable";
+import {StackNavigationProp} from '@react-navigation/stack';
+import { RootStackParamList } from "../App";
 
+type homeScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const HomeScreen = () => {
   // returns the navigation prop of the screen it's inside.
   // go to another screen, figures out the action it needs to take to do it
-  const navigation = useNavigation();
+  const navigation = useNavigation<homeScreenProp>();
 
   // This is like useEffect, but is synchronous
   // This is to remove the header option at the top

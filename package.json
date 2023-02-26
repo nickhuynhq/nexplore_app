@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-navigation/native-stack": "^6.9.11",
+    "@react-navigation/stack": "^6.3.15",
     "expo": "~47.0.12",
     "expo-status-bar": "~1.4.2",
     "nativewind": "^2.0.11",
