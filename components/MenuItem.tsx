@@ -1,9 +1,14 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ImageSourcePropType,
+} from "react-native";
 
 interface MenuItemProps {
   title: string;
-  imageSrc: HTMLImageElement | string;
+  imageSrc: ImageSourcePropType | undefined;
   type: string;
   setType: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -20,8 +25,8 @@ const MenuItem = ({ title, imageSrc, type, setType }: MenuItemProps) => {
       <View
         className={`w-20 h-20 p-4 rounded-lg ${
           type === title.toLocaleLowerCase()
-            ? "bg-gray-300 shadow-2xl"
-            : "bg-white shadow-sm"
+            ? "bg-gray-300 shadow-lg"
+            : "bg-white shadow-lg"
         }`}
       >
         <Image
@@ -31,7 +36,13 @@ const MenuItem = ({ title, imageSrc, type, setType }: MenuItemProps) => {
         />
       </View>
 
-      <Text className="font-semibold text-md">{title}</Text>
+      <Text
+        className={`${
+          type === title.toLocaleLowerCase() ? "font-bold" : "font-medium"
+        } text-md`}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

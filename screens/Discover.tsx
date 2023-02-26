@@ -13,7 +13,7 @@ type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 const Discover = () => {
   const navigation = useNavigation<discoverProps>();
 
-  const [menuSelection, setMenuSelection] = useState("resturants")
+  const [menuSelection, setMenuSelection] = useState("resturants");
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -53,33 +53,31 @@ const Discover = () => {
       </View>
 
       {/* Menu Container */}
-      <ScrollView>
-       
-      </ScrollView>
+      <ScrollView></ScrollView>
 
-      <View className="flex flex-row items-center justify-between px-8 mt-4">
-          <MenuItem 
-            key={"hotel"} 
-            title="Hotels" 
-            imageSrc={Hotels} 
-            type={menuSelection}
-            setType={setMenuSelection}
-          />
-          <MenuItem
-            key={"resturants"}
-            title="Resturants"
-            imageSrc={Restaurants}
-            type={menuSelection}
-            setType={setMenuSelection}
-          />
-          <MenuItem
-            key={"attraction"}
-            title="Attractions"
-            imageSrc={Attractions}
-            type={menuSelection}
-            setType={setMenuSelection}
-          />
-        </View>
+      <View className="absolute bottom-0 bg-white shadow-md h-[164px] w-full flex flex-row items-center justify-between px-8">
+        <MenuItem
+          key={"hotel"}
+          title="Hotels"
+          imageSrc={Hotels}
+          type={menuSelection}
+          setType={setMenuSelection}
+        />
+        <MenuItem
+          key={"resturants"}
+          title="Resturants"
+          imageSrc={Restaurants}
+          type={menuSelection}
+          setType={setMenuSelection}
+        />
+        <MenuItem
+          key={"attraction"}
+          title="Attractions"
+          imageSrc={Attractions}
+          type={menuSelection}
+          setType={setMenuSelection}
+        />
+      </View>
     </SafeAreaView>
   );
 };
