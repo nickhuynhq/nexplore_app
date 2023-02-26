@@ -7,7 +7,8 @@ import {
 } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { HeroImage, Logo } from "../assets";
+import { Logo } from "../assets";
+import HeroBackground from "../components/HeroBackground";
 import * as Animatable from "react-native-animatable";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
@@ -29,52 +30,42 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView className="flex h-full w-full bg-slate-50 relative">
-        
       <View className="abolute z-0 w-full h-[100vh]">
-        <Animatable.Image
-          animation="fadeInUp"
-          easing="ease-in-out"
-          source={{ uri: "https://i.pinimg.com/originals/b7/72/b3/b772b392f3a3326d75d33eaa531270b5.jpg" }}
-          className=" w-full h-full "
-        />
+        <HeroBackground />
       </View>
-
-      <View className=" absolute bg-slate-50 w-[100vw] h-[100vh] opacity-60"></View>
+      <View className=" absolute w-[100vw] h-[100vh] bg-white opacity-50 "></View>
 
       <View className="absolute w-full h-full py-16 z-10">
-        <View className="h-[33vh]">
-          {/* Top Section */}
-          <View className="flex flex-row w-full px-6 pt-6">
-            <Animatable.Image
-              animation="bounceInLeft"
-              easing="ease-in-out"
-              source={Logo}
-              resizeMode="contain"
-              className="w-2/3 h-14"
-            />
-          </View>
+        {/* Top Section */}
+        <View className="flex flex-row w-full px-6 pt-6">
+          <Animatable.Image
+            animation="bounceInLeft"
+            easing="ease-in-out"
+            source={Logo}
+            resizeMode="contain"
+            className="w-2/3 h-14"
+          />
+        </View>
 
-          {/* Hero Section */}
-          <View className="px-6 mt-8 space-y-3">
-            <Animatable.Text
-              animation="fadeInLeft"
-              delay={1000}
-              className="text-slate-900 text-[42px]"
-            >
-              Get out there and discover your
-            </Animatable.Text>
-            <Animatable.Text
-              animation="fadeInLeft"
-              delay={1500}
-              className="text-black font-bold text-[38px]"
-            >
-              Next Adventure!
-            </Animatable.Text>
-          </View>
+        {/* Hero Section */}
+        <View className="px-6 mt-20 space-y-3">
+          <Animatable.Text
+            animation="fadeInLeft"
+            delay={1000}
+            className="text-slate-900 text-[42px]"
+          >
+            Get out there and discover your
+          </Animatable.Text>
+          <Animatable.Text
+            animation="fadeInLeft"
+            delay={1500}
+            className="text-black font-bold text-[38px]"
+          >
+            Next Adventure!
+          </Animatable.Text>
         </View>
 
         <View className="flex items-center justify-center h-full w-full relative">
-
           {/* Go Button */}
           <View className="flex items-center justify-center absolute w-32 h-32 border-black border-4 rounded-full bg-transparent">
             <TouchableOpacity onPress={() => navigation.navigate("Discover")}>
