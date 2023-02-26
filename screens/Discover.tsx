@@ -4,6 +4,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
 import { Avatar } from "../assets";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { GOOGLE_API_KEY } from "@env";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
@@ -29,6 +31,20 @@ const Discover = () => {
             className="w-full h-full rounded-md object-cover"
           />
         </View>
+      </View>
+
+      <View className="flex-row items-center bg-white mx-6 mt-4 rounded-xl px-4 shadow-md">
+        <GooglePlacesAutocomplete
+          placeholder="Search"
+          onPress={(data, details = null) => {
+            // 'details' is provided when fetchDetails = true
+            console.log(data, details);
+          }}
+          query={{
+            key: GOOGLE_API_KEY,
+            language: "en",
+          }}
+        />
       </View>
     </SafeAreaView>
   );
