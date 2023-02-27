@@ -11,7 +11,7 @@ import React, { useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
-import { Attractions, Avatar, Hotels, NotFound, Restaurants } from "../assets";
+import { Attractions, Avatar, Hotels, NotFound, Restaurants } from "../assets/icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
 import MenuItem from "../components/MenuItem";

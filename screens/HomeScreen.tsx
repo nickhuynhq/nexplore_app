@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Logo } from "../assets";
+import { Logo } from "../assets/icons";
 import HeroBackground from "../components/HeroBackground";
 import * as Animatable from "react-native-animatable";
 import { StackNavigationProp } from "@react-navigation/stack";
