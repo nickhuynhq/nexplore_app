@@ -6,14 +6,14 @@ import {
   ImageSourcePropType,
 } from "react-native";
 
-interface MenuItemProps {
+interface MenuButtonProps {
   title: string;
   imageSrc: ImageSourcePropType | undefined;
   type: string;
   setType: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const MenuItem = ({ title, imageSrc, type, setType }: MenuItemProps) => {
+const MenuButton = ({ title, imageSrc, type, setType }: MenuButtonProps) => {
   const handleMenuPress = () => {
     setType(title.toLocaleLowerCase());
   };
@@ -47,4 +47,4 @@ const MenuItem = ({ title, imageSrc, type, setType }: MenuItemProps) => {
   );
 };
 
-export default MenuItem;
+export default MenuButton;

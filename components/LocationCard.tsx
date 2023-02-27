@@ -8,14 +8,14 @@ import {
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-interface ItemCardProps {
+interface LocationCardProps {
   title: string;
   imageSrc: string | undefined;
   location: string;
   data: {};
 }
 
-const ItemCard = ({ imageSrc, title, location, data}: ItemCardProps) => {
+const LocationCard = ({ imageSrc, title, location, data}: LocationCardProps) => {
   return (
     <TouchableOpacity className="rounded-md space-y-2 mb-3 pb-2 shadow-md min-w-0 bg-white w-[48%] ">
       <Image
@@ -37,4 +37,4 @@ const ItemCard = ({ imageSrc, title, location, data}: ItemCardProps) => {
   );
 };
 
-export default ItemCard;
+export default LocationCard;

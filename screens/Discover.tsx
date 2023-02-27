@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
@@ -18,12 +18,15 @@ import {
   NotFound,
   Restaurants,
 } from "../assets/icons";
+import { MaterialIcons } from "@expo/vector-icons";
+
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
-import MenuItem from "../components/MenuItem";
-import { MaterialIcons } from "@expo/vector-icons";
-import ItemCard from "../components/ItemCard";
-import { getPlacesData } from "../api";
+
+import MenuButton from "../components/MenuButton";
+import LocationCard from "../components/LocationCard";
+
+import { getPlacesData } from "../utils/api";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
@@ -104,7 +107,7 @@ const Discover = () => {
                 {mainData?.map((data, i) => {
                   if (data?.name)
                     return (
-                      <ItemCard
+                      <LocationCard
                         key={i}
                         imageSrc={
                           data?.photo?.images?.medium?.url
@@ -138,21 +141,21 @@ const Discover = () => {
 
       {/* Menu Container */}
       <View className="absolute bottom-0 bg-white shadow-md h-[124px] w-full flex flex-row items-center justify-between px-10 pb-2">
-        <MenuItem
+        <MenuButton
           key={"hotel"}
           title="Hotels"
           imageSrc={Hotels}
           type={menuSelection}
           setType={setMenuSelection}
         />
-        <MenuItem
+        <MenuButton
           key={"resturants"}
           title="Resturants"
           imageSrc={Restaurants}
           type={menuSelection}
           setType={setMenuSelection}
         />
-        <MenuItem
+        <MenuButton
           key={"attraction"}
           title="Attractions"
           imageSrc={Attractions}
