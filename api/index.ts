@@ -20,11 +20,13 @@ export const getPlacesData = async () => {
           lang: "en_US",
         },
         headers: {
-          "X-RapidAPI-Key": RAPIDAPI_API_KEY,
+          "X-RapidAPI-Key": `${RAPIDAPI_API_KEY}`,
           "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
         },
       }
     );
+
+    return data;
   } catch (error) {
     console.log(error);
     return null;

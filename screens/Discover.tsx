@@ -7,16 +7,23 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
-import { Attractions, Avatar, Hotels, NotFound, Restaurants } from "../assets/icons";
+import {
+  Attractions,
+  Avatar,
+  Hotels,
+  NotFound,
+  Restaurants,
+} from "../assets/icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
 import MenuItem from "../components/MenuItem";
 import { MaterialIcons } from "@expo/vector-icons";
 import ItemCard from "../components/ItemCard";
+import { getPlacesData } from "../api";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
@@ -25,11 +32,21 @@ const Discover = () => {
 
   const [menuSelection, setMenuSelection] = useState("resturants");
   const [isLoading, setIsLoading] = useState(false);
-  const [mainData, setMainData] = useState([]);
+  const [mainData, setMainData] = useState<any[]>([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
+    });
+  }, []);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getPlacesData().then((data) => {
+      setMainData(data);
+      setInterval(() => {
+        setIsLoading(false);
+      }, 2000);
     });
   }, []);
 
@@ -84,22 +101,22 @@ const Discover = () => {
           <View className="flex-row justify-between flex-wrap items-center mt-3">
             {mainData?.length > 0 ? (
               <>
-                <ItemCard
-                  key={1}
-                  imageSrc={
-                    "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
-                  }
-                  title="Vietnam Farm fsdgsdfgdfsgdfsgd"
-                  location="Vietnam"
-                />
-                <ItemCard
-                  key={2}
-                  imageSrc={
-                    "https://cdn.pixabay.com/photo/2023/02/08/07/32/vietnamese-woman-7775904_960_720.jpg"
-                  }
-                  title="Vietnam Farm"
-                  location="Vietnam"
-                />
+                {mainData?.map((data, i) => {
+                  if (data?.name)
+                    return (
+                      <ItemCard
+                        key={i}
+                        imageSrc={
+                          data?.photo?.images?.medium?.url
+                            ? data?.photo?.images?.medium?.url
+                            : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                        }
+                        title={data?.name}
+                        location={data?.location_string}
+                        data={data}
+                      />
+                    );
+                })}
               </>
             ) : (
               <>
@@ -109,7 +126,9 @@ const Discover = () => {
                     className="w-32 h-32"
                     source={NotFound}
                   />
-                  <Text className="font-bold text-xl">Sorry... No Data Found</Text>
+                  <Text className="font-bold text-xl">
+                    Sorry... No Data Found
+                  </Text>
                 </View>
               </>
             )}

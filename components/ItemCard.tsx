@@ -12,15 +12,18 @@ interface ItemCardProps {
   title: string;
   imageSrc: string | undefined;
   location: string;
+  data: {};
 }
 
-const ItemCard = ({ imageSrc, title, location }: ItemCardProps) => {
+const ItemCard = ({ imageSrc, title, location, data}: ItemCardProps) => {
   return (
-    <TouchableOpacity className="rounded-md space-y-2 pb-2 shadow-md min-w-0 bg-white w-[48%] ">
+    <TouchableOpacity className="rounded-md space-y-2 mb-3 pb-2 shadow-md min-w-0 bg-white w-[48%] ">
       <Image
         source={{ uri: imageSrc }}
         className="w-full h-36 rounded-t-md object-cover"
       />
+
+      
       <Text className="font-bold text-md px-2">
         {title?.length > 14 ? `${title.slice(0, 15)}...` : title}
       </Text>
