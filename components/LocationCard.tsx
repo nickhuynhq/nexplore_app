@@ -26,7 +26,7 @@ const LocationCard = ({
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("LocationDetails", { param: data })}
+      onPress={() => navigation.navigate("Location", { param: data })}
       className="rounded-md space-y-2 mb-3 pb-2 shadow-md min-w-0 bg-white w-[48%] "
     >
       <Image
