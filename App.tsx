@@ -7,7 +7,7 @@ import LocationDetails from "./screens/LocationDetails";
 export type RootStackParamList = {
   Home: undefined;
   Discover: undefined;
-  Location: undefined;
+  Location: { param: string };
 };
 
 // returns Screen and Navigator which are used for configuring the navigator
