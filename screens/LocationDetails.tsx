@@ -37,6 +37,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
   return (
     <SafeAreaView className="flex-1 w-[100vw] bg-slate-50 relative">
       <ScrollView className="flex-1 w-full px-6 py-6">
+        {/* Image container */}
         <View className="relative bg-white rounded-2xl shadow-lg">
           <Image
             source={{
@@ -61,7 +62,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
 
           <View className="absolute flex-col inset-x-0 bottom-5 items-start px-6 gap-2">
             <View
-              className={`flex-row px-2 py-1 rounded-md ${
+              className={`flex-row px-2 py-2 rounded-md ${
                 data?.open_now_text.substring(
                   0,
                   data?.open_now_text.indexOf(" ")
@@ -80,9 +81,6 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
 
             {(data?.price_level || data?.price) && (
               <View className="flex-row space-x-4 items-center bg-white px-2 py-1 rounded-md">
-                <Text className="text-md font-bold text-gray-600">
-                  {data?.price_level}
-                </Text>
                 <Text className="text-xl font-bold text-gray-600">
                   {data?.price}
                 </Text>
@@ -91,6 +89,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           </View>
         </View>
 
+        {/* Title and location container */}
         <View className="flex-row gap-2 mt-3">
           <Text className="font-bold text-xl">{data?.name}</Text>
         </View>
@@ -101,7 +100,8 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           </Text>
         </View>
 
-        <View className="flex-row justify-between items-center mt-2">
+        {/* Stats Icon container */}
+        <View className="flex-row space-x-2 items-center mt-2">
           {data?.rating && (
             <View className="flex-row gap-2">
               <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
@@ -144,7 +144,29 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
             </View>
           )}
         </View>
-        
+
+        {/* About Section */}
+        <View className="mt-4">
+          <Text className="font-bold text-gray-500 text-lg">About</Text>
+          <Text className="text-gray-500 text-sm">
+            {data?.description ? data?.description : "No Description"}
+          </Text>
+        </View>
+
+        {/* Cuisine Container */}
+        <View className="flex gap-2 mt-4">
+          <Text className="font-bold text-gray-500 text-md">Categories</Text>
+          <View className="flex-row flex-start gap-2 flex-wrap">
+            {data?.cuisine.map((cuisine) => (
+              <TouchableOpacity
+                key={cuisine.key}
+                className="px-3 py-1.5 bg-gray-200 rounded-2xl"
+              >
+                <Text className="font-semibold text-black">{cuisine.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
