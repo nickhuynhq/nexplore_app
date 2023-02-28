@@ -20,7 +20,7 @@ interface LocationDetailsProps {
 }
 
 const LocationDetails = ({ route }: LocationDetailsProps) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<LocationProps>();
   const data = route?.params?.param as any;
 
   useLayoutEffect(() => {
@@ -45,12 +45,26 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           />
 
           <View className="absolute flex-row inset-x-0 top-5 justify-between px-4">
-            <TouchableOpacity className="w-10 h-10 rounded-md items-center justify-center bg-white">
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Discover")}
+              className="w-10 h-10 rounded-md items-center justify-center bg-white"
+            >
               <Entypo name="chevron-left" size={26} color="black" />
             </TouchableOpacity>
             <TouchableOpacity className="w-10 h-10 rounded-md items-center justify-center bg-amber-500">
               <AntDesign name="heart" size={24} color="white" />
             </TouchableOpacity>
+          </View>
+
+          <View className="absolute flex-row inset-x-0 bottom-5 w-full justify-between px-6">
+            <View className="flex-row space-x-2 items-center">
+              <Text className="text-md font-bold text-gray-100">
+                {data?.price_level}
+              </Text>
+              <Text className="text-xl font-bold text-gray-100">
+                {data?.price}
+              </Text>
+            </View>
           </View>
         </View>
         <Text>LocationDetails</Text>
