@@ -10,7 +10,7 @@ import React, { ReactNode, useLayoutEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation, RouteProp } from "@react-navigation/native";
-import { Entypo, AntDesign } from "@expo/vector-icons";
+import { Entypo, AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 
 type LocationProps = StackNavigationProp<RootStackParamList, "Location">;
 type LocationRouteProp = RouteProp<RootStackParamList, "Location">;
@@ -55,10 +55,16 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           </View>
 
           <View className="absolute flex-col inset-x-0 bottom-5 items-start px-6 gap-2">
-            <View className={`flex-row px-2 py-1 rounded-md ${data?.open_now_text.substring(
+            <View
+              className={`flex-row px-2 py-1 rounded-md ${
+                data?.open_now_text.substring(
                   0,
                   data?.open_now_text.indexOf(" ")
-                ) === "Closed" ? ` bg-red-500` : ` bg-green-500`}`}>
+                ) === "Closed"
+                  ? ` bg-red-500`
+                  : ` bg-green-500`
+              }`}
+            >
               <Text className="text-white font-bold uppercase">
                 {data?.open_now_text.substring(
                   0,
@@ -79,7 +85,15 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
             )}
           </View>
         </View>
-        <Text>LocationDetails</Text>
+
+        <View className="flex-row gap-2 mt-3">
+          <Text className="font-bold text-xl">{data?.name}</Text>
+        </View>
+        <View className="flex-row gap-1 py-1 items-center">
+          <MaterialCommunityIcons name="map-marker" size={22} color="#d97706" />
+          <Text className="font-semibold text-gray-500">{data?.location_string}</Text>
+        </View>
+
       </ScrollView>
     </SafeAreaView>
   );
