@@ -12,6 +12,7 @@ import { RootStackParamList } from "../App";
 import { useNavigation, RouteProp } from "@react-navigation/native";
 import {
   FontAwesome,
+  FontAwesome5,
   Entypo,
   AntDesign,
   MaterialCommunityIcons,
@@ -43,7 +44,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
             source={{
               uri: (data?.photo?.images?.medium?.url
                 ? data?.photo?.images?.medium?.url
-                : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png") as string,
+                : "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=") as string,
             }}
             className="w-full h-72 rounded-2xl"
           />
@@ -171,7 +172,29 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
         </View>
 
         {/* Address and contact Container */}
-        <View></View>
+        <View className="flex-col space-y-0.5 mt-6">
+
+          {data?.phone && (
+            <View className="flex-row gap-3">
+              <FontAwesome name="phone" size={24} color="gray" />
+              <Text className="text-gray-500 font-semibold">{data?.phone}</Text>
+            </View>
+          )}
+          {data?.email && (
+            <View className="flex-row gap-3">
+              <MaterialCommunityIcons name="email" size={24} color="gray" />
+              <Text className="text-gray-500 font-semibold">{data?.email}</Text>
+            </View>
+          )}
+          {data?.phone && (
+            <View className="flex-row w-full gap-3">
+              <FontAwesome5 name="map-marked-alt" size={24} color="gray" />
+              <Text className="text-gray-500 w-full font-semibold">
+                {data?.address}
+              </Text>
+            </View>
+          )}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

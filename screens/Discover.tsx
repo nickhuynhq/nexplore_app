@@ -18,14 +18,11 @@ import {
   NotFound,
   Restaurants,
 } from "../assets/icons";
-import { MaterialIcons } from "@expo/vector-icons";
-
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GOOGLE_API_KEY } from "@env";
-
 import MenuButton from "../components/MenuButton";
 import LocationCard from "../components/LocationCard";
-
+import { MaterialIcons } from "@expo/vector-icons";
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import { GOOGLE_API_KEY } from "@env";
 import { getPlacesData } from "../utils/api";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
@@ -112,7 +109,7 @@ const Discover = () => {
                         imageSrc={
                           data?.photo?.images?.medium?.url
                             ? data?.photo?.images?.medium?.url
-                            : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                            : "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ="
                         }
                         title={data?.name}
                         location={data?.location_string}
