@@ -61,23 +61,25 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           </View>
 
           <View className="absolute flex-col inset-x-0 bottom-5 items-start px-6 gap-2">
-            <View
-              className={`flex-row px-2 py-2 rounded-md ${
-                data?.open_now_text.substring(
-                  0,
-                  data?.open_now_text.indexOf(" ")
-                ) === "Closed"
-                  ? ` bg-black`
-                  : ` bg-green-500`
-              }`}
-            >
-              <Text className="text-white font-bold uppercase">
-                {data?.open_now_text.substring(
-                  0,
-                  data?.open_now_text.indexOf(" ")
-                )}
-              </Text>
-            </View>
+            {data?.open_now_text && (
+              <View
+                className={`flex-row px-2 py-2 rounded-md ${
+                  data?.open_now_text.substring(
+                    0,
+                    data?.open_now_text.indexOf(" ")
+                  ) === "Closed"
+                    ? ` bg-black`
+                    : ` bg-green-500`
+                }`}
+              >
+                <Text className="text-white font-bold uppercase">
+                  {data?.open_now_text.substring(
+                    0,
+                    data?.open_now_text.indexOf(" ")
+                  )}
+                </Text>
+              </View>
+            )}
 
             {(data?.price_level || data?.price) && (
               <View className="flex-row space-x-4 items-center bg-white px-2 py-1 rounded-md">
@@ -169,6 +171,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
         </View>
 
         {/* Address and contact Container */}
+        <View></View>
       </ScrollView>
     </SafeAreaView>
   );
