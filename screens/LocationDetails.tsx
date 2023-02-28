@@ -10,7 +10,12 @@ import React, { ReactNode, useLayoutEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation, RouteProp } from "@react-navigation/native";
-import { Entypo, AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  Entypo,
+  AntDesign,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 type LocationProps = StackNavigationProp<RootStackParamList, "Location">;
 type LocationRouteProp = RouteProp<RootStackParamList, "Location">;
@@ -61,7 +66,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
                   0,
                   data?.open_now_text.indexOf(" ")
                 ) === "Closed"
-                  ? ` bg-red-500`
+                  ? ` bg-black`
                   : ` bg-green-500`
               }`}
             >
@@ -91,9 +96,55 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
         </View>
         <View className="flex-row gap-1 py-1 items-center">
           <MaterialCommunityIcons name="map-marker" size={22} color="#d97706" />
-          <Text className="font-semibold text-gray-500">{data?.location_string}</Text>
+          <Text className="font-semibold text-gray-500">
+            {data?.location_string}
+          </Text>
         </View>
 
+        <View className="flex-row justify-between items-center mt-2">
+          {data?.rating && (
+            <View className="flex-row gap-2">
+              <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
+                <FontAwesome name="star" size={24} color="white" />
+              </View>
+              <View className="justify-center">
+                <Text className="text-gray-500 font-semibold">
+                  {data?.rating}
+                </Text>
+                <Text className="text-gray-500">Rating</Text>
+              </View>
+            </View>
+          )}
+
+          {data?.price_level && (
+            <View className="flex-row gap-2">
+              <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
+                <FontAwesome name="dollar" size={24} color="white" />
+              </View>
+              <View className="justify-center">
+                <Text className="text-gray-500 font-semibold">
+                  {data?.price_level}
+                </Text>
+                <Text className="text-gray-500">Price Level</Text>
+              </View>
+            </View>
+          )}
+
+          {data?.bearing && (
+            <View className="flex-row gap-2">
+              <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
+                <Entypo name="compass" size={24} color="white" />
+              </View>
+              <View className="justify-center">
+                <Text className="text-gray-500 font-semibold capitalize">
+                  {data?.bearing}
+                </Text>
+                <Text className="text-gray-500">Direction</Text>
+              </View>
+            </View>
+          )}
+        </View>
+        
       </ScrollView>
     </SafeAreaView>
   );
