@@ -55,7 +55,10 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           </View>
 
           <View className="absolute flex-col inset-x-0 bottom-5 items-start px-6 gap-2">
-            <View className="flex-row px-2 py-1 rounded-md bg-blue-500">
+            <View className={`flex-row px-2 py-1 rounded-md ${data?.open_now_text.substring(
+                  0,
+                  data?.open_now_text.indexOf(" ")
+                ) === "Closed" ? ` bg-red-500` : ` bg-green-500`}`}>
               <Text className="text-white font-bold uppercase">
                 {data?.open_now_text.substring(
                   0,
