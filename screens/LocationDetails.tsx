@@ -145,10 +145,10 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           )}
         </View>
 
-        {/* About Section */}
-        <View className="mt-4">
-          <Text className="font-bold text-gray-500 text-lg">About</Text>
-          <Text className="text-gray-500 text-sm">
+        {/* About Container */}
+        <View className="flex mt-6">
+          <Text className="font-bold text-gray-500 text-md">About</Text>
+          <Text className="text-gray-500 text-sm mt-1">
             {data?.description ? data?.description : "No Description"}
           </Text>
         </View>
@@ -157,7 +157,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
         <View className="flex gap-2 mt-4">
           <Text className="font-bold text-gray-500 text-md">Categories</Text>
           <View className="flex-row flex-start gap-2 flex-wrap">
-            {data?.cuisine.map((cuisine) => (
+            {data?.cuisine.map((cuisine: { key: number; name: string }) => (
               <TouchableOpacity
                 key={cuisine.key}
                 className="px-3 py-1.5 bg-gray-200 rounded-2xl"
@@ -167,6 +167,8 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
             ))}
           </View>
         </View>
+
+        {/* Address and contact Container */}
       </ScrollView>
     </SafeAreaView>
   );
