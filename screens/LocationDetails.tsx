@@ -29,11 +29,9 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
     });
   }, []);
 
-  console.log(data);
-
   return (
-    <SafeAreaView className="flex-1 bg-slate-50 relative">
-      <ScrollView className="flex-1 px-6 py-6">
+    <SafeAreaView className="flex-1 w-[100vw] bg-slate-50 relative">
+      <ScrollView className="flex-1 w-full px-6 py-6">
         <View className="relative bg-white rounded-2xl shadow-lg">
           <Image
             source={{
@@ -56,15 +54,26 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
             </TouchableOpacity>
           </View>
 
-          <View className="absolute flex-row inset-x-0 bottom-5 w-full justify-between px-6">
-            <View className="flex-row space-x-2 items-center">
-              <Text className="text-md font-bold text-gray-100">
-                {data?.price_level}
-              </Text>
-              <Text className="text-xl font-bold text-gray-100">
-                {data?.price}
+          <View className="absolute flex-col inset-x-0 bottom-5 items-start px-6 gap-2">
+            <View className="flex-row px-2 py-1 rounded-md bg-blue-500">
+              <Text className="text-white font-bold uppercase">
+                {data?.open_now_text.substring(
+                  0,
+                  data?.open_now_text.indexOf(" ")
+                )}
               </Text>
             </View>
+
+            {(data?.price_level || data?.price) && (
+              <View className="flex-row space-x-4 items-center bg-white px-2 py-1 rounded-md">
+                <Text className="text-md font-bold text-gray-600">
+                  {data?.price_level}
+                </Text>
+                <Text className="text-xl font-bold text-gray-600">
+                  {data?.price}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
         <Text>LocationDetails</Text>
