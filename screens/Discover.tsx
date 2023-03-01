@@ -24,6 +24,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_API_KEY } from "@env";
 import { getPlacesData } from "../utils/api";
+import { coordinatesInterface } from "../utils/types/types";
 
 type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 
@@ -33,6 +34,16 @@ const Discover = () => {
   const [menuSelection, setMenuSelection] = useState("resturants");
   const [isLoading, setIsLoading] = useState(false);
   const [mainData, setMainData] = useState<any[]>([]);
+  const [coordinates, setCoordinates] = useState<coordinatesInterface>({
+    tr: {
+      lat: 43.85545793597914,
+      long: -79.11689708040795,
+    },
+    bl: {
+      lat: 43.58102453761487,
+      long: -79.63921897890965,
+    },
+  });
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -42,13 +53,13 @@ const Discover = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getPlacesData().then((data) => {
+    getPlacesData(coordinates).then((data) => {
       setMainData(data);
       setInterval(() => {
         setIsLoading(false);
       }, 2000);
     });
-  }, []);
+  }, [coordinates]);
 
   return (
     <SafeAreaView className="flex-1 bg-slate-50 relative">
@@ -74,6 +85,16 @@ const Discover = () => {
           onPress={(data, details = null) => {
             // 'details' is provided when fetchDetails = true
             console.log(details?.geometry?.viewport);
+            setCoordinates({
+              tr: {
+                lat: details?.geometry?.viewport?.northeast?.lat,
+                long: details?.geometry?.viewport?.northeast?.lng,
+              },
+              bl: {
+                lat: details?.geometry?.viewport?.southwest?.lat,
+                long: details?.geometry?.viewport?.southwest?.lng,
+              },
+            });
           }}
           query={{
             key: GOOGLE_API_KEY,
