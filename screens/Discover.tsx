@@ -31,7 +31,7 @@ type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 const Discover = () => {
   const navigation = useNavigation<discoverProps>();
 
-  const [menuSelection, setMenuSelection] = useState("resturants");
+  const [menuSelection, setMenuSelection] = useState("restaurants");
   const [isLoading, setIsLoading] = useState(false);
   const [mainData, setMainData] = useState<any[]>([]);
   const [coordinates, setCoordinates] = useState<coordinatesInterface>({
@@ -53,13 +53,13 @@ const Discover = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getPlacesData(coordinates).then((data) => {
+    getPlacesData({coordinates, menuSelection}).then((data) => {
       setMainData(data);
       setInterval(() => {
         setIsLoading(false);
       }, 2000);
     });
-  }, [coordinates]);
+  }, [coordinates, menuSelection]);
 
   return (
     <SafeAreaView className="flex-1 bg-slate-50 relative">
@@ -113,7 +113,7 @@ const Discover = () => {
       </View>
 
       {/* Listings Container */}
-      {isLoading ? (
+      {isLoading && !mainData ? (
         <View className="flex-1 items-center justify-center pb-20">
           <ActivityIndicator size="large" color="black" />
         </View>
@@ -160,22 +160,22 @@ const Discover = () => {
       {/* Menu Container */}
       <View className="absolute bottom-0 bg-white shadow-md h-[124px] w-full flex flex-row items-center justify-between px-10 pb-2">
         <MenuButton
-          key={"hotel"}
-          title="Hotels"
+          key={"hotels"}
+          title="hotels"
           imageSrc={Hotels}
           type={menuSelection}
           setType={setMenuSelection}
         />
         <MenuButton
-          key={"resturants"}
-          title="Resturants"
+          key={"restaurants"}
+          title="restaurants"
           imageSrc={Restaurants}
           type={menuSelection}
           setType={setMenuSelection}
         />
         <MenuButton
-          key={"attraction"}
-          title="Attractions"
+          key={"attractions"}
+          title="attractions"
           imageSrc={Attractions}
           type={menuSelection}
           setType={setMenuSelection}
