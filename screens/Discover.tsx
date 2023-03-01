@@ -53,11 +53,9 @@ const Discover = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getPlacesData({coordinates, menuSelection}).then((data) => {
+    getPlacesData({ coordinates, menuSelection }).then((data) => {
       setMainData(data);
-      setInterval(() => {
-        setIsLoading(false);
-      }, 2000);
+      setIsLoading(false);
     });
   }, [coordinates, menuSelection]);
 
@@ -113,7 +111,7 @@ const Discover = () => {
       </View>
 
       {/* Listings Container */}
-      {isLoading && !mainData ? (
+      {isLoading ? (
         <View className="flex-1 items-center justify-center pb-20">
           <ActivityIndicator size="large" color="black" />
         </View>
