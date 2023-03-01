@@ -5,6 +5,9 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Button,
+  Linking,
+  Platform,
 } from "react-native";
 import React, { ReactNode, useLayoutEffect } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -29,6 +32,14 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
   const navigation = useNavigation<LocationProps>();
   const data = route?.params?.param as any;
 
+  const scheme = Platform.select({ ios: "maps:0,0?q=", android: "geo:0,0?q=" });
+  const latLng = `${data?.latitude},${data?.longitude}`;
+  const label = `${data?.name}`;
+  const url = Platform.select({
+    ios: `${scheme}${label}@${latLng}`,
+    android: `${scheme}${latLng}(${label})`,
+  });
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
@@ -36,8 +47,8 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 w-[100vw] bg-slate-50 relative">
-      <ScrollView className="flex-1 w-full px-6 py-6">
+    <SafeAreaView className="flex-1 bg-slate-50 relative">
+      <ScrollView className="flex-1 px-6 py-6">
         {/* Image container */}
         <View className="relative bg-white rounded-2xl shadow-lg">
           <Image
@@ -46,7 +57,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
                 ? data?.photo?.images?.medium?.url
                 : "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=") as string,
             }}
-            className="w-full h-72 rounded-2xl"
+            className="w-full h-72 rounded-2xl shadow-lg"
           />
 
           <View className="absolute flex-row inset-x-0 top-5 justify-between px-4">
@@ -104,7 +115,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
         </View>
 
         {/* Stats Icon container */}
-        <View className="flex-row space-x-2 items-center mt-2">
+        <View className="flex-row space-x-2 items-center mt-4">
           {data?.rating && (
             <View className="flex-row gap-2">
               <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
@@ -150,7 +161,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
 
         {/* About Container */}
         <View className="flex mt-6">
-          <Text className="font-bold text-gray-500 text-md">About</Text>
+          <Text className="font-bold text-gray-500 text-lg">About</Text>
           <Text className="text-gray-500 text-sm mt-1">
             {data?.description ? data?.description : "No Description"}
           </Text>
@@ -158,7 +169,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
 
         {/* Cuisine Container */}
         <View className="flex gap-2 mt-4">
-          <Text className="font-bold text-gray-500 text-md">Categories</Text>
+          <Text className="font-bold text-gray-500 text-lg">Categories</Text>
           <View className="flex-row flex-start gap-2 flex-wrap">
             {data?.cuisine.map((cuisine: { key: number; name: string }) => (
               <TouchableOpacity
@@ -173,26 +184,70 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
 
         {/* Address and contact Container */}
         <View className="flex-col space-y-0.5 mt-6">
-
+        <Text className="font-bold text-gray-500 text-lg">Contact</Text>
           {data?.phone && (
-            <View className="flex-row gap-3">
+            <TouchableOpacity
+              className="flex-row gap-3"
+              onPress={() => {
+                Linking.openURL(`tel:${data?.phone}`);
+              }}
+            >
               <FontAwesome name="phone" size={24} color="gray" />
               <Text className="text-gray-500 font-semibold">{data?.phone}</Text>
-            </View>
+            </TouchableOpacity>
           )}
           {data?.email && (
-            <View className="flex-row gap-3">
+            <TouchableOpacity
+              className="flex-row gap-3"
+              onPress={() => {
+                Linking.openURL(`mailto:${data?.email}`);
+              }}
+            >
               <MaterialCommunityIcons name="email" size={24} color="gray" />
               <Text className="text-gray-500 font-semibold">{data?.email}</Text>
-            </View>
+            </TouchableOpacity>
           )}
-          {data?.phone && (
-            <View className="flex-row w-full gap-3">
+          {data?.address && (
+            <TouchableOpacity
+              className="flex-row w-full gap-3"
+              onPress={() => {
+                Linking.openURL(url as string);
+              }}
+            >
               <FontAwesome5 name="map-marked-alt" size={24} color="gray" />
               <Text className="text-gray-500 w-full font-semibold">
                 {data?.address}
               </Text>
-            </View>
+            </TouchableOpacity>
+          )}
+        </View>
+
+        {/* Website and review buttons */}
+        <View className="flex-row items-center justify-between mt-6 mb-10 mx-4">
+          {data?.web_url && (
+            <TouchableOpacity
+              className="flex items-center"
+              onPress={() => {
+                Linking.openURL(data?.web_url);
+              }}
+            >
+              <MaterialCommunityIcons name="web" size={24} color="gray" />
+              <Text className="text-gray-500 w-full font-semibold">
+                Website
+              </Text>
+            </TouchableOpacity>
+          )}
+
+          {data?.write_review && (
+            <TouchableOpacity
+              className="flex items-center"
+              onPress={() => {
+                Linking.openURL(data?.write_review);
+              }}
+            >
+              <FontAwesome5 name="pencil-alt" size={24} color="gray" />
+              <Text className="text-gray-500 w-full font-semibold">Review</Text>
+            </TouchableOpacity>
           )}
         </View>
       </ScrollView>
