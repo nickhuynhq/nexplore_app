@@ -8,10 +8,10 @@ export const getPlacesData = async (coordinates : coordinatesInterface) => {
       `https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary`,
       {
         params: {
-          bl_latitude: coordinates ? coordinates.bl.lat : "11.847676",
-          tr_latitude: coordinates ? coordinates.tr.lat : "12.838442",
-          bl_longitude: coordinates ? coordinates.bl.long : "109.095887",
-          tr_longitude: coordinates ? coordinates.tr.long : "109.149359",
+          bl_latitude: coordinates.bl.lat,
+          tr_latitude: coordinates.tr.lat,
+          bl_longitude: coordinates.bl.long,
+          tr_longitude: coordinates.tr.long,
           restaurant_tagcategory_standalone: "10591",
           restaurant_tagcategory: "10591",
           limit: "30",
