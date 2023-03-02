@@ -8,7 +8,7 @@
 - Location information was pulled from the Travel Advisor API <br>
 
 **📱 To demo the App, please use this link below to access Expo Go:** <br>
--> [Expo Go Link](https://expo.dev/@nickhuynhq/explore_app?serviceType=classic&distribution=expo-go)
+-> [Expo Go Link](https://expo.dev/@nickhuynhq/nexplore?serviceType=classic&distribution=expo-go)
 
 ## Project Screenshot
 ![nexplore_mockup](https://user-images.githubusercontent.com/71597829/222345094-743a04ff-858c-41a0-ad84-1489187aa68a.jpg)
