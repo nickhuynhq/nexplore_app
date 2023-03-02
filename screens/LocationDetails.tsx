@@ -115,7 +115,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
         </View>
 
         {/* Stats Icon container */}
-        <View className="flex-row space-x-2 items-center mt-4">
+        <View className="flex-row space-x-2 justify-evenly items-center mt-4">
           {data?.rating && (
             <View className="flex-row gap-2">
               <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
@@ -182,7 +182,8 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
                     </Text>
                   </TouchableOpacity>
                 ))
-              : data?.subcategory.map(
+              : data?.subcategory &&
+                data?.subcategory.map(
                   (subcategory: { key: number; name: string }) => (
                     <TouchableOpacity
                       key={subcategory.key}
@@ -202,7 +203,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           <Text className="font-bold text-gray-500 text-lg">Contact</Text>
           {data?.phone && (
             <TouchableOpacity
-              className="flex-row gap-3"
+              className="flex-row items-center gap-4"
               onPress={() => {
                 Linking.openURL(`tel:${data?.phone}`);
               }}
@@ -213,7 +214,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           )}
           {data?.email && (
             <TouchableOpacity
-              className="flex-row gap-3"
+              className="flex-row items-center  gap-4"
               onPress={() => {
                 Linking.openURL(`mailto:${data?.email}`);
               }}
@@ -224,13 +225,13 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
           )}
           {data?.address && (
             <TouchableOpacity
-              className="flex-row w-full gap-3"
+              className="flex-row items-center w-full gap-4"
               onPress={() => {
                 Linking.openURL(url as string);
               }}
             >
               <FontAwesome5 name="map-marked-alt" size={24} color="gray" />
-              <Text className="text-gray-500 w-full font-semibold">
+              <Text className="text-gray-500 w-[85%] font-semibold">
                 {data?.address}
               </Text>
             </TouchableOpacity>
