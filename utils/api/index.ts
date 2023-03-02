@@ -30,8 +30,6 @@ export const getPlacesData = async ({coordinates, menuSelection}: getPlacesDataP
       }
     );
 
-    console.log("Data:",data)
-    
     return data;
   } catch (error) {
     console.log(error);

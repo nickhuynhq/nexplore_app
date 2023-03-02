@@ -39,7 +39,7 @@ const MenuButton = ({ title, imageSrc, type, setType }: MenuButtonProps) => {
       <Text
         className={`${
           type === title.toLocaleLowerCase() ? "font-bold" : "font-medium"
-        } text-md`}
+        } text-md capitalize`}
       >
         {title}
       </Text>

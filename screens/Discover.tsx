@@ -133,7 +133,7 @@ const Discover = () => {
             paddingHorizontal: 8,
             marginBottom: 16,
           }}
-          className="flex-1 mt-6"
+          className="flex-1 mt-2"
           renderItem={({ item }) => (
             <LocationCard
               imageSrc={
