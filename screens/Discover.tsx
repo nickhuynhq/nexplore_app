@@ -55,7 +55,7 @@ const Discover = () => {
   useEffect(() => {
     setIsLoading(true);
     getPlacesData({ coordinates, menuSelection }).then((data) => {
-      setMainData(data);
+      setMainData(data.filter((item: any) => item.name));
       setIsLoading(false);
     });
   }, [coordinates, menuSelection]);
@@ -135,6 +135,7 @@ const Discover = () => {
           }}
           className="flex-1 mt-2"
           renderItem={({ item }) => (
+            
             <LocationCard
               imageSrc={
                 item?.photo?.images?.medium?.url
