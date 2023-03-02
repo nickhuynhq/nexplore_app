@@ -93,7 +93,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
               </View>
             )}
 
-            {(data?.price_level || data?.price) && (
+            {(data?.price) && (
               <View className="flex-row space-x-4 items-center bg-white px-2 py-1 rounded-md">
                 <Text className="text-xl font-bold text-gray-600">
                   {data?.price}

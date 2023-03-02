@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   FlatList,
 } from "react-native";
-import { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../App";
 import { useNavigation } from "@react-navigation/native";
@@ -20,7 +20,7 @@ import {
 } from "../assets/icons";
 import MenuButton from "../components/MenuButton";
 import LocationCard from "../components/LocationCard";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
 import { GOOGLE_API_KEY } from "@env";
@@ -110,6 +110,17 @@ const Discover = () => {
         </TouchableOpacity>
       </View>
 
+      {/* Warning banner for hotel api */}
+      {menuSelection === "hotels" && (
+        <View className="flex-row mx-6 items-center space-x-2 bg-yellow-400 py-2 px-3 rounded-md">
+          <FontAwesome name="warning" size={18} color="black" />
+          <Text>
+            Our Hotel listings are currently under maintenance. Thank you for
+            your patience.
+          </Text>
+        </View>
+      )}
+
       {/* Listings Container */}
       {isLoading ? (
         <View className="flex-1 items-center justify-center pb-20">
@@ -117,11 +128,12 @@ const Discover = () => {
         </View>
       ) : mainData.length === 0 ? (
         <View className="flex items-center justify-center flex-1 px-8 py-4 mb-10">
-          <Image source={NotFound} className="w-24 h-24"/>
+          <Image source={NotFound} className="w-24 h-24" />
           <Text className="mt-4 text-xl font-bold text-gray-500">404</Text>
-           <Text className="mt-2 text-lg font-semibold text-gray-500">Sorry...No results at this time.</Text>
+          <Text className="mt-2 text-lg font-semibold text-gray-500">
+            Sorry...No results at this time.
+          </Text>
         </View>
-       
       ) : (
         <FlatList
           data={mainData}
@@ -135,7 +147,6 @@ const Discover = () => {
           }}
           className="flex-1 mt-2"
           renderItem={({ item }) => (
-            
             <LocationCard
               imageSrc={
                 item?.photo?.images?.medium?.url
