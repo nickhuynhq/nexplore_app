@@ -16,6 +16,8 @@
 
 ## Project Demo
 
+https://user-images.githubusercontent.com/71597829/222483501-e63dd60d-a1c6-47a8-baa7-d2a31fbd889d.mov
+
 
 ## Current Features
 - Search locations
