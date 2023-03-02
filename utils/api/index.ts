@@ -8,7 +8,6 @@ interface getPlacesDataProps {
 }
 
 export const getPlacesData = async ({coordinates, menuSelection}: getPlacesDataProps) => {
-  console.log(coordinates, menuSelection)
   try {
     const { data: { data }, } = await axios.get(
       `https://travel-advisor.p.rapidapi.com/${menuSelection}/list-in-boundary`,
@@ -31,6 +30,8 @@ export const getPlacesData = async ({coordinates, menuSelection}: getPlacesDataP
       }
     );
 
+    console.log("Data:",data)
+    
     return data;
   } catch (error) {
     console.log(error);

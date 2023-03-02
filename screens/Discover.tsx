@@ -3,7 +3,6 @@ import {
   Text,
   Image,
   SafeAreaView,
-  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
@@ -33,7 +32,7 @@ type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 const Discover = () => {
   const navigation = useNavigation<discoverProps>();
 
-  const [menuSelection, setMenuSelection] = useState("restaurants");
+  const [menuSelection, setMenuSelection] = useState("hotels");
   const [isLoading, setIsLoading] = useState(false);
   const [mainData, setMainData] = useState<any[]>([]);
   const [coordinates, setCoordinates] = useState<coordinatesInterface>({
@@ -116,45 +115,14 @@ const Discover = () => {
         <View className="flex-1 items-center justify-center pb-20">
           <ActivityIndicator size="large" color="black" />
         </View>
+      ) : mainData.length === 0 ? (
+        <View className="flex items-center justify-center flex-1 px-8 py-4 mb-10">
+          <Image source={NotFound} className="w-24 h-24"/>
+          <Text className="mt-4 text-xl font-bold text-gray-500">404</Text>
+           <Text className="mt-2 text-lg font-semibold text-gray-500">Sorry...No results at this time.</Text>
+        </View>
+       
       ) : (
-        // <ScrollView className="px-8">
-        //   <View className="flex-row justify-between flex-wrap items-center mt-3">
-        //     {mainData?.length > 0 ? (
-        //       <>
-        //         {mainData?.map((data, i) => {
-        //           if (data?.name)
-        //             return (
-        //               <LocationCard
-        //                 key={i}
-        //                 imageSrc={
-        //                   data?.photo?.images?.medium?.url
-        //                     ? data?.photo?.images?.medium?.url
-        //                     : "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ="
-        //                 }
-        //                 title={data?.name}
-        //                 location={data?.location_string}
-        //                 data={data}
-        //               />
-        //             );
-        //         })}
-        //       </>
-        //     ) : (
-        //       <>
-        //         <View className="flex w-full h-[300px] items-center gap-3 justify-center">
-        //           <Image
-        //             resizeMode="contain"
-        //             className="w-32 h-32"
-        //             source={NotFound}
-        //           />
-        //           <Text className="font-bold text-xl">
-        //             Sorry... No Data Found
-        //           </Text>
-        //         </View>
-        //       </>
-        //     )}
-        //   </View>
-        // </ScrollView>
-
         <FlatList
           data={mainData}
           keyExtractor={(item, index) => index.toString()}
@@ -166,7 +134,6 @@ const Discover = () => {
             marginBottom: 16,
           }}
           className="flex-1 mt-6"
-          // style={{ flex: 1, marginTop: 16, marginHorizontal: -8 }}
           renderItem={({ item }) => (
             <LocationCard
               imageSrc={
