@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "explore_app",
-    "slug": "explore_app",
+    "name": "Nexplore",
+    "slug": "nexplore",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
