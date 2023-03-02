@@ -67,7 +67,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
             >
               <Entypo name="chevron-left" size={26} color="black" />
             </TouchableOpacity>
-            <TouchableOpacity className="w-10 h-10 rounded-md items-center justify-center bg-amber-500">
+            <TouchableOpacity className="w-10 h-10 rounded-md items-center justify-center bg-pink-500">
               <AntDesign name="heart" size={24} color="white" />
             </TouchableOpacity>
           </View>
@@ -93,7 +93,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
               </View>
             )}
 
-            {(data?.price) && (
+            {data?.price && (
               <View className="flex-row space-x-4 items-center bg-white px-2 py-1 rounded-md">
                 <Text className="text-xl font-bold text-gray-600">
                   {data?.price}
@@ -117,8 +117,10 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
         {/* Stats Icon container */}
         <View className="flex-row space-x-2 justify-evenly items-center mt-4">
           {data?.rating && (
-            <View className="flex-row gap-2">
-              <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
+            <TouchableOpacity className="flex-row gap-2" onPress={() => {
+              Linking.openURL(data?.write_review);
+            }}>
+              <View className="w-10 h-10 bg-amber-400 shadow-md rounded-md items-center justify-center">
                 <FontAwesome name="star" size={24} color="white" />
               </View>
               <View className="justify-center">
@@ -127,26 +129,31 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
                 </Text>
                 <Text className="text-gray-500">Rating</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
 
           {data?.price_level && (
             <View className="flex-row gap-2">
-              <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
+              <View className="w-10 h-10 bg-green-400 shadow-md rounded-md items-center justify-center">
                 <FontAwesome name="dollar" size={24} color="white" />
               </View>
               <View className="justify-center">
                 <Text className="text-gray-500 font-semibold">
                   {data?.price_level}
                 </Text>
-                <Text className="text-gray-500">Price Level</Text>
+                <Text className="text-gray-500">Price</Text>
               </View>
             </View>
           )}
 
           {data?.bearing && (
-            <View className="flex-row gap-2">
-              <View className="w-10 h-10 bg-amber-300 shadow-md rounded-md items-center justify-center">
+            <TouchableOpacity
+              className="flex-row gap-2"
+              onPress={() => {
+                Linking.openURL(url as string);
+              }}
+            >
+              <View className="w-10 h-10 bg-blue-400 shadow-md rounded-md items-center justify-center">
                 <Entypo name="compass" size={24} color="white" />
               </View>
               <View className="justify-center">
@@ -155,7 +162,7 @@ const LocationDetails = ({ route }: LocationDetailsProps) => {
                 </Text>
                 <Text className="text-gray-500">Direction</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         </View>
 
