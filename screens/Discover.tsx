@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  FlatList,
 } from "react-native";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -22,6 +23,7 @@ import MenuButton from "../components/MenuButton";
 import LocationCard from "../components/LocationCard";
 import { MaterialIcons } from "@expo/vector-icons";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+
 import { GOOGLE_API_KEY } from "@env";
 import { getPlacesData } from "../utils/api";
 import { coordinatesInterface } from "../utils/types/types";
@@ -82,7 +84,6 @@ const Discover = () => {
           fetchDetails={true}
           onPress={(data, details = null) => {
             // 'details' is provided when fetchDetails = true
-            console.log(details?.geometry?.viewport);
             setCoordinates({
               tr: {
                 lat: details?.geometry?.viewport?.northeast?.lat,
@@ -116,43 +117,69 @@ const Discover = () => {
           <ActivityIndicator size="large" color="black" />
         </View>
       ) : (
-        <ScrollView className="px-8">
-          <View className="flex-row justify-between flex-wrap items-center mt-3">
-            {mainData?.length > 0 ? (
-              <>
-                {mainData?.map((data, i) => {
-                  if (data?.name)
-                    return (
-                      <LocationCard
-                        key={i}
-                        imageSrc={
-                          data?.photo?.images?.medium?.url
-                            ? data?.photo?.images?.medium?.url
-                            : "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ="
-                        }
-                        title={data?.name}
-                        location={data?.location_string}
-                        data={data}
-                      />
-                    );
-                })}
-              </>
-            ) : (
-              <>
-                <View className="flex w-full h-[300px] items-center gap-3 justify-center">
-                  <Image
-                    resizeMode="contain"
-                    className="w-32 h-32"
-                    source={NotFound}
-                  />
-                  <Text className="font-bold text-xl">
-                    Sorry... No Data Found
-                  </Text>
-                </View>
-              </>
-            )}
-          </View>
-        </ScrollView>
+        // <ScrollView className="px-8">
+        //   <View className="flex-row justify-between flex-wrap items-center mt-3">
+        //     {mainData?.length > 0 ? (
+        //       <>
+        //         {mainData?.map((data, i) => {
+        //           if (data?.name)
+        //             return (
+        //               <LocationCard
+        //                 key={i}
+        //                 imageSrc={
+        //                   data?.photo?.images?.medium?.url
+        //                     ? data?.photo?.images?.medium?.url
+        //                     : "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ="
+        //                 }
+        //                 title={data?.name}
+        //                 location={data?.location_string}
+        //                 data={data}
+        //               />
+        //             );
+        //         })}
+        //       </>
+        //     ) : (
+        //       <>
+        //         <View className="flex w-full h-[300px] items-center gap-3 justify-center">
+        //           <Image
+        //             resizeMode="contain"
+        //             className="w-32 h-32"
+        //             source={NotFound}
+        //           />
+        //           <Text className="font-bold text-xl">
+        //             Sorry... No Data Found
+        //           </Text>
+        //         </View>
+        //       </>
+        //     )}
+        //   </View>
+        // </ScrollView>
+
+        <FlatList
+          data={mainData}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
+          numColumns={2}
+          columnWrapperStyle={{
+            justifyContent: "space-between",
+            paddingHorizontal: 8,
+            marginBottom: 16,
+          }}
+          className="flex-1 mt-6"
+          // style={{ flex: 1, marginTop: 16, marginHorizontal: -8 }}
+          renderItem={({ item }) => (
+            <LocationCard
+              imageSrc={
+                item?.photo?.images?.medium?.url
+                  ? item?.photo?.images?.medium?.url
+                  : "https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ="
+              }
+              title={item?.name}
+              location={item?.location_string}
+              data={item}
+            />
+          )}
+        />
       )}
 
       {/* Menu Container */}
