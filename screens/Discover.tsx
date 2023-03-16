@@ -32,7 +32,7 @@ type discoverProps = StackNavigationProp<RootStackParamList, "Discover">;
 const Discover = () => {
   const navigation = useNavigation<discoverProps>();
 
-  const [menuSelection, setMenuSelection] = useState("hotels");
+  const [menuSelection, setMenuSelection] = useState("restaurants");
   const [isLoading, setIsLoading] = useState(false);
   const [mainData, setMainData] = useState<any[]>([]);
   const [coordinates, setCoordinates] = useState<coordinatesInterface>({
